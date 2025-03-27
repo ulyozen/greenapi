@@ -1,0 +1,33 @@
+name: QA Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs: 
+  testing:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with: 
+          dotnet-version: '8.x'
+        
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --no-restore
+      
+      - name: Run Tests
+        run: dotnet test --no-build --verbosity normal
+        env:
+          GreenApi__ChatId: ${{ secrets.GREEN_API_CHAT_ID }}
+          GreenApi__IdInstance: ${{ secrets.GREEN_API_ID_INSTANCE }}
+          GreenApi__ApiTokenInstance: ${{ secrets.GREEN_API_API_TOKEN }}
+          GreenApi__Url: ${{ secrets.GREEN_API_URL }}
