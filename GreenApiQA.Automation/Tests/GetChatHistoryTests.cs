@@ -27,7 +27,7 @@ public sealed class GetChatHistoryTests
     [InlineData(5)]
     public async Task GetChatHistory_ShouldReturnMessages(int count)
     {
-        await Task.Delay(500);
+        await Task.Delay(1000);
         
         var request = new GetChatHistoryRequest
         {
@@ -105,7 +105,7 @@ public sealed class GetChatHistoryTests
         string expectedError,
         HttpStatusCode expectedStatusCode)
     {
-        await Task.Delay(700);
+        await Task.Delay(1000);
         
         var json = JsonSerializer.Serialize(request);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
