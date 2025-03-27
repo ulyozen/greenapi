@@ -64,7 +64,7 @@ public sealed class GetChatHistoryTests
         var response = await _client.PostAsync($"getChatHistory/{_settings.ApiTokenInstance}", content);
         if (response.StatusCode == HttpStatusCode.TooManyRequests)
         {
-            await Task.Delay(500);
+            await Task.Delay(1000);
             response = await _client.PostAsync($"getChatHistory/{_settings.ApiTokenInstance}", content);
         }
         response.StatusCode.Should().Be(HttpStatusCode.OK);
